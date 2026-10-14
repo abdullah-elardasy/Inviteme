@@ -668,6 +668,26 @@
 
     // ============ INITIALIZATION ============
     
+    function initGuestNameFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const namaTamuParam = urlParams.get('to');
+
+    if (namaTamuParam) {
+        const namaFormatted = namaTamuParam.replace(/\+/g, ' ');
+
+        // Input nama di sampul depan (Dear:)
+        const inputCover = document.getElementById('guestName');
+        if (inputCover) {
+            inputCover.value = namaFormatted;
+        }
+
+        // Input nama di form RSVP / Ucapan
+        const inputRsvp = document.getElementById('rsvpName');
+        if (inputRsvp) {
+            inputRsvp.value = namaFormatted;
+        }
+    }
+}    
     function init() {
         initCover();
         initBackgroundMusic();
@@ -675,6 +695,7 @@
         initCopyButtons();
         initRSVPForm();
         initWishes();
+        initGuestNameFromUrl(); // <-- Tambahkan baris ini di sini!
         
         console.log('✨ Wedding invitation initialized');
     }
@@ -688,5 +709,6 @@
     window.weddingApp = {
         retryLoadWishes: loadWishes
     };
+
 
 })();
