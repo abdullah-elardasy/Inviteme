@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Undangan Pernikahan Digital - Minimalist Template with Photo Gallery">
+    <title>Undangan Pernikahan</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font: Elegant serif and sans-serif combination -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <!-- Background Music -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Music Toggle Button -->
+    <button id="musicToggle" class="music-toggle" aria-label="Toggle Music">
+        <i class="fas fa-music"></i>
+    </button>
+
+    <!-- Opening Cover -->
+    <section id="cover" class="cover">
+        <div class="cover-content">
+            <div class="cover-ornament">
+                <div class="ornament-line"></div>
+                <i class="fas fa-heart"></i>
+                <div class="ornament-line"></div>
+            </div>
+            <h2 class="cover-greeting">Undangan Pernikahan</h2>
+            <h1 class="couple-names-cover">Sarah & Ahmad</h1>
+            <div class="guest-name">
+                <p class="kepada">Kepada Yth.</p>
+                <p class="guest" id="guestName">Bpk/Ibu/Saudara/i</p>
+            </div>
+            <button id="openInvitation" class="btn-open">
+                <i class="fas fa-envelope-open"></i>
+                Buka Undangan
+            </button>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="mainContent" class="main-content hidden">
+        
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-ornament">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h2 class="hero-title fade-in">The Wedding of</h2>
+                <h1 class="couple-names fade-in">Sarah & Ahmad</h1>
+                <p class="wedding-date fade-in">Sabtu, 15 Maret 2025</p>
+            </div>
+        </section>
+
+        <!-- Couple Introduction -->
+        <section class="couple-section">
+            <div class="container">
+                <div class="couple-intro fade-in">
+                    <!-- Bride -->
+                    <div class="person bride">
+                        <div class="person-avatar">
+                            <img src="https://via.placeholder.com/300x300/8B9D83/FFFFFF?text=Sarah" alt="Sarah Amelia Putri">
+                        </div>
+                        <h3 class="person-name">Sarah Amelia Putri</h3>
+                        <p class="person-parents">Putri dari<br>Bpk. Budi Santoso & Ibu Siti Rahayu</p>
+                        <div class="person-social">
+                            <a href="https://instagram.com/sarah" target="_blank" aria-label="Instagram Sarah">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Ornament -->
+                    <div class="couple-ornament">
+                        <i class="fas fa-heart"></i>
+                    </div>
+
+                    <!-- Groom -->
+                    <div class="person groom">
+                        <div class="person-avatar">
+                            <img src="https://via.placeholder.com/300x300/C9A96E/FFFFFF?text=Ahmad" alt="Ahmad Rizki Maulana">
+                        </div>
+                        <h3 class="person-name">Ahmad Rizki Maulana</h3>
+                        <p class="person-parents">Putra dari<br>Bpk. Hendra Wijaya & Ibu Nina Marlina</p>
+                        <div class="person-social">
+                            <a href="https://instagram.com/ahmad" target="_blank" aria-label="Instagram Ahmad">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wedding Event Details -->
+        <section class="event-section">
+            <div class="container">
+                <h2 class="section-title fade-in">Acara Pernikahan</h2>
+                
+                <div class="event-cards">
+                    <!-- Akad Card -->
+                    <div class="event-card fade-in">
+                        <div class="event-icon">
+                            <i class="fas fa-ring"></i>
+                        </div>
+                        <h3 class="event-title">Akad Nikah</h3>
+                        <div class="event-details">
+                            <p class="event-day">Sabtu</p>
+                            <p class="event-date">15 Maret 2025</p>
+                            <p class="event-time"><i class="far fa-clock"></i> 08.00 - 10.00 WIB</p>
+                            <p class="event-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Masjid Al-Ikhlas<br>
+                                Jl. Merdeka No. 123, Jakarta
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Resepsi Card -->
+                    <div class="event-card fade-in">
+                        <div class="event-icon">
+                            <i class="fas fa-glass-cheers"></i>
+                        </div>
+                        <h3 class="event-title">Resepsi Pernikahan</h3>
+                        <div class="event-details">
+                            <p class="event-day">Sabtu</p>
+                            <p class="event-date">15 Maret 2025</p>
+                            <p class="event-time"><i class="far fa-clock"></i> 11.00 - 14.00 WIB</p>
+                            <p class="event-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Gedung Graha Sejahtera<br>
+                                Jl. Merdeka No. 125, Jakarta
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Google Maps Button -->
+                <div class="map-button fade-in">
+                    <a href="https://maps.google.com/?q=-6.200000,106.816666" target="_blank" class="btn-map">
+                        <i class="fas fa-map-marked-alt"></i>
+                        Buka Google Maps
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Countdown Timer -->
+        <section class="countdown-section">
+            <div class="container">
+                <h2 class="section-title fade-in">Menuju Hari Bahagia</h2>
+                <div class="countdown fade-in" id="countdown">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">00</span>
+                        <span class="countdown-label">Hari</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hours">00</span>
+                        <span class="countdown-label">Jam</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minutes">00</span>
+                        <span class="countdown-label">Menit</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="seconds">00</span>
+                        <span class="countdown-label">Detik</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Photo Gallery Section -->
+        <section class="gallery-section">
+            <div class="container">
+                <h2 class="section-title fade-in">Galeri Foto</h2>
+                <p class="section-subtitle fade-in">Momen indah perjalanan cinta kami</p>
+                
+                <div class="gallery-grid" id="galleryGrid">
+                    <!-- Gallery items - Replace with actual photos -->
+                    <div class="gallery-item fade-in" data-index="0">
+                        <img src="https://via.placeholder.com/600x800/8B9D83/FFFFFF?text=Photo+1" alt="Gallery Photo 1" loading="lazy">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item fade-in" data-index="1">
+                        <img src="https://via.placeholder.com/600x600/C9A96E/FFFFFF?text=Photo+2" alt="Gallery Photo 2" loading="lazy">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item fade-in" data-index="2">
+                        <img src="https://via.placeholder.com/600x800/8B9D83/FFFFFF?text=Photo+3" alt="Gallery Photo 3" loading="lazy">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item fade-in" data-index="3">
+                        <img src="https://via.placeholder.com/800x600/C9A96E/FFFFFF?text=Photo+4" alt="Gallery Photo 4" loading="lazy">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item fade-in" data-index="4">
+                        <img src="https://via.placeholder.com/600x600/8B9D83/FFFFFF?text=Photo+5" alt="Gallery Photo 5" loading="lazy">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item fade-in" data-index="5">
+                        <img src="https://via.placeholder.com/600x800/C9A96E/FFFFFF?text=Photo+6" alt="Gallery Photo 6" loading="lazy">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item fade-in" data-index="6">
+                        <img src="https://via.placeholder.com/800x600/8B9D83/FFFFFF?text=Photo+7" alt="Gallery Photo 7" loading="lazy">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item fade-in" data-index="7">
+                        <img src="https://via.placeholder.com/600x600/C9A96E/FFFFFF?text=Photo+8" alt="Gallery Photo 8" loading="lazy">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item fade-in" data-index="8">
+                        <img src="https://via.placeholder.com/600x800/8B9D83/FFFFFF?text=Photo+9" alt="Gallery Photo 9" loading="lazy">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item fade-in" data-index="9">
+                        <img src="https://via.placeholder.com/600x600/C9A96E/FFFFFF?text=Photo+10" alt="Gallery Photo 10" loading="lazy">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lightbox Modal -->
+        <div id="lightbox" class="lightbox">
+            <button class="lightbox-close" id="closeLightbox">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="lightbox-nav lightbox-prev" id="prevPhoto">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="lightbox-nav lightbox-next" id="nextPhoto">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="lightbox-content">
+                <img id="lightboxImage" src="" alt="Lightbox Image">
+            </div>
+            <div class="lightbox-counter" id="lightboxCounter">1 / 10</div>
+        </div>
+
+        <!-- RSVP & Wishes Form -->
+        <section class="rsvp-section">
+            <div class="container">
+                <h2 class="section-title fade-in">Konfirmasi Kehadiran</h2>
+                <p class="section-subtitle fade-in">Mohon berkenan untuk mengisi konfirmasi kehadiran dan ucapan</p>
+                
+                <form class="rsvp-form fade-in" id="rsvpForm">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" name="name" required placeholder="Masukkan nama Anda">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="attendance">Konfirmasi Kehadiran</label>
+                        <select id="attendance" name="attendance" required>
+                            <option value="">Pilih konfirmasi kehadiran</option>
+                            <option value="hadir">Hadir</option>
+                            <option value="tidak-hadir">Tidak Hadir</option>
+                            <option value="masih-ragu">Masih Ragu</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="guests">Jumlah Tamu</label>
+                        <input type="number" id="guests" name="guests" min="1" max="5" value="1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Ucapan & Doa</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Tuliskan ucapan dan doa untuk mempelai"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i>
+                        Kirim Ucapan
+                    </button>
+                </form>
+
+                <!-- Wishes List -->
+                <div class="wishes-list fade-in" id="wishesList">
+                    <h3 class="wishes-title">Ucapan & Doa</h3>
+                    <div class="wishes-container" id="wishesContainer">
+                        <!-- Sample wishes -->
+                        <div class="wish-item">
+                            <div class="wish-header">
+                                <span class="wish-name">Rina Wijaya</span>
+                                <span class="wish-status hadir">Hadir</span>
+                            </div>
+                            <p class="wish-message">Selamat menempuh hidup baru! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah.</p>
+                        </div>
+                        <div class="wish-item">
+                            <div class="wish-header">
+                                <span class="wish-name">Budi Santoso</span>
+                                <span class="wish-status hadir">Hadir</span>
+                            </div>
+                            <p class="wish-message">Barakallah untuk kalian berdua! Semoga langgeng sampai kakek nenek.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Digital Envelope / Gift Section -->
+        <section class="gift-section">
+            <div class="container">
+                <h2 class="section-title fade-in">Amplop Digital</h2>
+                <p class="section-subtitle fade-in">Tanpa mengurangi rasa hormat, bagi yang ingin memberikan tanda kasih</p>
+                
+                <div class="gift-cards">
+                    <!-- Bank Account -->
+                    <div class="gift-card fade-in">
+                        <div class="gift-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <h3 class="gift-bank">Bank BCA</h3>
+                        <p class="gift-name">Sarah Amelia Putri</p>
+                        <div class="gift-number-container">
+                            <p class="gift-number" id="bankNumber1">1234567890</p>
+                            <button class="btn-copy" onclick="copyToClipboard('1234567890', this)">
+                                <i class="fas fa-copy"></i>
+                                Salin
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- E-Wallet -->
+                    <div class="gift-card fade-in">
+                        <div class="gift-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <h3 class="gift-bank">GoPay / OVO</h3>
+                        <p class="gift-name">Ahmad Rizki Maulana</p>
+                        <div class="gift-number-container">
+                            <p class="gift-number" id="walletNumber1">081234567890</p>
+                            <button class="btn-copy" onclick="copyToClipboard('081234567890', this)">
+                                <i class="fas fa-copy"></i>
+                                Salin
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Closing Section -->
+        <section class="closing-section">
+            <div class="container">
+                <div class="closing-content fade-in">
+                    <div class="closing-ornament">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <p class="closing-text">
+                        Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i 
+                        berkenan hadir untuk memberikan doa restu kepada kami.
+                    </p>
+                    <p class="closing-signature">
+                        Wassalamu'alaikum Warahmatullahi Wabarakatuh<br>
+                        Kami yang berbahagia,
+                    </p>
+                    <h3 class="closing-names">Sarah & Ahmad</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Made with <i class="fas fa-heart"></i> by <a href="https://inviteme.my.id" target="_blank">inviteme.my.id</a></p>
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
