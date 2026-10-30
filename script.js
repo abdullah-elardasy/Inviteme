@@ -1,7 +1,6 @@
 /* ========================================
-   INVITEME - DIGITAL WEDDING INVITATION
-   Interactive JavaScript Features
-   Created by: @abdullah_elardasy
+   INVITEME - PREMIUM DIGITAL WEDDING INVITATION
+   Interactive JavaScript (No Dark Mode)
    ======================================== */
 
 // ========== WAIT FOR DOM TO LOAD ==========
@@ -12,7 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const navMenu = document.getElementById('navMenu');
     
     if (hamburger && navMenu) {
-        hamburger.addEventListener('click', function() {
+        hamburger.addEventListener('click', function(e) {
+            e.stopPropagation();
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
         });
@@ -35,21 +35,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // ========== STICKY HEADER ==========
+    // ========== STICKY HEADER WITH SLIM GLASSMORPHISM EFFECT ==========
     const header = document.getElementById('header');
     let lastScroll = 0;
     
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', debounce(function() {
         const currentScroll = window.pageYOffset;
         
         if (currentScroll > 100) {
-            header.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.1)';
+            header.style.boxShadow = '0 6px 28px rgba(127, 17, 48, 0.12)';
+            header.style.background = 'rgba(253, 251, 247, 0.9)';
+            header.style.backdropFilter = 'blur(12px)';
         } else {
-            header.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.08)';
+            header.style.boxShadow = '0 4px 20px rgba(127, 17, 48, 0.08)';
+            header.style.background = 'rgba(253, 251, 247, 0.85)';
+            header.style.backdropFilter = 'blur(10px)';
         }
         
         lastScroll = currentScroll;
-    });
+    }, 10));
     
     // ========== SMOOTH SCROLLING FOR ANCHOR LINKS ==========
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -81,98 +85,51 @@ document.addEventListener('DOMContentLoaded', function() {
     const filterButtons = document.querySelectorAll('.filter-btn');
     const catalogCards = document.querySelectorAll('.catalog-card');
     
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Remove active class from all buttons
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            
-            // Add active class to clicked button
-            this.classList.add('active');
-            
-            // Get filter value
-            const filterValue = this.getAttribute('data-filter');
-            
-            // Filter catalog cards
-            catalogCards.forEach(card => {
-                const cardCategory = card.getAttribute('data-category');
+    if (filterButtons.length > 0) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
                 
-                if (filterValue === 'all') {
-                    // Show all cards
-                    card.style.display = 'block';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'scale(1)';
-                    }, 10);
-                } else if (cardCategory === filterValue) {
-                    // Show matching cards
-                    card.style.display = 'block';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'scale(1)';
-                    }, 10);
-                } else {
-                    // Hide non-matching cards
-                    card.style.opacity = '0';
-                    card.style.transform = 'scale(0.9)';
-                    setTimeout(() => {
-                        card.style.display = 'none';
-                    }, 300);
-                }
-            });
-        });
-    });
-    
-    // ========== FAQ ACCORDION ==========
-    const faqItems = document.querySelectorAll('.faq-item');
-    
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        
-        question.addEventListener('click', function() {
-            // Check if this item is already active
-            const isActive = item.classList.contains('active');
-            
-            // Close all FAQ items
-            faqItems.forEach(faqItem => {
-                faqItem.classList.remove('active');
-                const answer = faqItem.querySelector('.faq-answer');
-                answer.style.maxHeight = null;
-            });
-            
-            // If it wasn't active, open it
-            if (!isActive) {
-                item.classList.add('active');
-                const answer = item.querySelector('.faq-answer');
-                answer.style.maxHeight = answer.scrollHeight + 'px';
-            }
-        });
-    });
-    
-    // ========== BACK TO TOP BUTTON ==========
-    const backToTopBtn = document.getElementById('backToTop');
-    
-    if (backToTopBtn) {
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 500) {
-                backToTopBtn.classList.add('show');
-            } else {
-                backToTopBtn.classList.remove('show');
-            }
-        });
-        
-        backToTopBtn.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Get filter value
+                const filterValue = this.getAttribute('data-filter');
+                
+                // Filter catalog cards with smooth animation
+                catalogCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    
+                    if (filterValue === 'all') {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 10);
+                    } else if (cardCategory === filterValue) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 10);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.9)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
             });
         });
     }
     
-    // ========== ANIMATE ON SCROLL ==========
+    // ========== INTERSECTION OBSERVER FOR SCROLL ANIMATIONS ==========
     const observerOptions = {
         root: null,
         threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        rootMargin: '0px 0px -100px 0px'
     };
     
     const observer = new IntersectionObserver(function(entries) {
@@ -180,73 +137,18 @@ document.addEventListener('DOMContentLoaded', function() {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
+                entry.target.style.transition = 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
             }
         });
     }, observerOptions);
     
     // Observe elements for animation
-    const animateElements = document.querySelectorAll('.feature-card, .catalog-card, .step-card, .testimonial-card, .faq-item');
-    
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
     animateElements.forEach(element => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(30px)';
-        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(element);
     });
     
-    // ========== FLOATING ANIMATION FOR HERO CARDS ==========
-    const floatingCards = document.querySelectorAll('.floating-card');
-    
-    floatingCards.forEach((card, index) => {
-        // Add slight random delay for more natural movement
-        const delay = index * 0.3;
-        card.style.animationDelay = `${delay}s`;
-    });
-    
-    // ========== DYNAMIC YEAR IN FOOTER ==========
-    const currentYear = new Date().getFullYear();
-    const copyrightText = document.querySelector('.footer-copyright');
-    if (copyrightText) {
-        copyrightText.innerHTML = copyrightText.innerHTML.replace('2026', currentYear);
-    }
-    
-    // ========== CATALOG CARD HOVER EFFECT ==========
-    catalogCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transition = 'all 0.3s ease';
-        });
-    });
-    
-    // ========== PREVENT DEMO LINKS FROM NAVIGATING ==========
-    // Since demo links are placeholders, we'll show an alert
-    const demoLinks = document.querySelectorAll('a[href="#"]');
-    demoLinks.forEach(link => {
-        // Only prevent default for actual demo buttons, not all # links
-        if (link.textContent.includes('Demo') || link.textContent.includes('Lihat Demo')) {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                alert('Demo sedang dalam pengembangan. Silakan hubungi kami via WhatsApp untuk melihat contoh tema secara langsung! 😊');
-            });
-        }
-    });
-    
-    // ========== LAZY LOADING FOR IMAGES ==========
-    const images = document.querySelectorAll('img[data-src]');
-    
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.getAttribute('data-src');
-                img.removeAttribute('data-src');
-                imageObserver.unobserve(img);
-            }
-        });
-    });
-    
-    images.forEach(img => imageObserver.observe(img));
-    
-    // ========== STATS COUNTER ANIMATION ==========
+    // ========== HERO STATS COUNTER ANIMATION ==========
     const statsNumbers = document.querySelectorAll('.stat-item h3');
     let hasAnimated = false;
     
@@ -255,28 +157,28 @@ document.addEventListener('DOMContentLoaded', function() {
             if (entry.isIntersecting && !hasAnimated) {
                 hasAnimated = true;
                 statsNumbers.forEach(stat => {
-                    const text = stat.textContent;
-                    const hasPlus = text.includes('+');
-                    const numberMatch = text.match(/\d+/);
+                    const htmlContent = stat.innerHTML;
+                    const numberMatch = htmlContent.match(/\d+/);
                     
                     if (numberMatch) {
                         const finalNumber = parseInt(numberMatch[0]);
                         let currentNumber = 0;
-                        const increment = finalNumber / 50;
+                        const increment = finalNumber / 60;
                         const duration = 2000;
-                        const stepTime = duration / 50;
+                        const stepTime = duration / 60;
                         
                         const counter = setInterval(() => {
                             currentNumber += increment;
                             if (currentNumber >= finalNumber) {
-                                stat.textContent = text;
+                                stat.innerHTML = htmlContent;
                                 clearInterval(counter);
                             } else {
-                                if (text.includes('/')) {
-                                    stat.textContent = currentNumber.toFixed(1) + '/5';
-                                } else {
-                                    stat.textContent = Math.floor(currentNumber) + (hasPlus ? '+' : '');
-                                }
+                                // Preserve the original HTML structure while updating number
+                                const tempDiv = document.createElement('div');
+                                tempDiv.innerHTML = htmlContent;
+                                const numberNode = tempDiv.firstChild;
+                                numberNode.textContent = Math.floor(currentNumber);
+                                stat.innerHTML = tempDiv.innerHTML;
                             }
                         }, stepTime);
                     }
@@ -290,14 +192,108 @@ document.addEventListener('DOMContentLoaded', function() {
         statsObserver.observe(heroStats);
     }
     
-    // ========== CONSOLE MESSAGE ==========
-    console.log('%c👑 Inviteme - Digital Wedding Invitation', 'color: #C5A882; font-size: 20px; font-weight: bold;');
-    console.log('%cCreated with ❤️ by @abdullah_elardasy', 'color: #666; font-size: 14px;');
-    console.log('%c🚀 Need a custom digital invitation? Contact us via WhatsApp!', 'color: #4CAF50; font-size: 12px;');
+    // ========== PARALLAX EFFECT FOR FLOATING ELEMENTS ==========
+    const floatingElements = document.querySelectorAll('.floating-badge');
+    
+    if (floatingElements.length > 0 && window.innerWidth > 768) {
+        window.addEventListener('scroll', debounce(function() {
+            const scrolled = window.pageYOffset;
+            floatingElements.forEach((element, index) => {
+                const speed = (index + 1) * 0.1;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        }, 10));
+    }
+    
+    // ========== SMOOTH ENTRY ANIMATIONS ON PAGE LOAD ==========
+    setTimeout(() => {
+        document.querySelectorAll('.animate-slide-up, .animate-fade-in').forEach(element => {
+            element.style.visibility = 'visible';
+        });
+    }, 100);
+    
+    // ========== FEATURE CARDS STAGGERED ANIMATION ==========
+    const featureCards = document.querySelectorAll('.feature-card');
+    const featureObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, index * 100);
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    featureCards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(50px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        featureObserver.observe(card);
+    });
+    
+    // ========== CATALOG CARDS STAGGERED ANIMATION ==========
+    const catalogCardsAnim = document.querySelectorAll('.catalog-card');
+    const catalogObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, index * 100);
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    catalogCardsAnim.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(50px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        catalogObserver.observe(card);
+    });
+    
+    // ========== PREVENT DEMO LINKS FROM NAVIGATING ==========
+    const demoLinks = document.querySelectorAll('a[href*="demo"], a[href*="Preview"], a[href="#"]');
+    demoLinks.forEach(link => {
+        const linkText = link.textContent.toLowerCase();
+        if (linkText.includes('demo') || linkText.includes('preview') || linkText.includes('lihat')) {
+            link.addEventListener('click', function(e) {
+                // Only prevent if it's not an actual demo link
+                if (!this.href.includes('nasik-nabila') && this.href.includes('#')) {
+                    e.preventDefault();
+                    showNotification('Preview template akan segera hadir! Hubungi kami via WhatsApp untuk melihat demo lengkap. 💍');
+                }
+            });
+        }
+    });
+    
+    // ========== WHATSAPP LINK ANALYTICS ==========
+    const waLinks = document.querySelectorAll('a[href*="wa.me"]');
+    waLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            console.log('WhatsApp link clicked:', this.href);
+            // Add your analytics code here
+            // Example: gtag('event', 'whatsapp_click', { 'event_category': 'engagement' });
+        });
+    });
+    
+    // ========== DYNAMIC YEAR IN FOOTER ==========
+    const currentYear = new Date().getFullYear();
+    const copyrightElements = document.querySelectorAll('[data-year]');
+    copyrightElements.forEach(element => {
+        element.textContent = currentYear;
+    });
+    
+    // ========== CONSOLE BRANDING ==========
+    console.log('%c💍 Inviteme - Premium Digital Wedding Invitation', 'color: #7f1130; font-size: 20px; font-weight: bold; font-family: Playfair Display, serif;');
+    console.log('%c✨ Crafted with love and elegance', 'color: #ffd38d; font-size: 14px;');
+    console.log('%c🚀 Ready to create your dream invitation?', 'color: #6b5445; font-size: 12px;');
     
 });
 
-// ========== PERFORMANCE OPTIMIZATION: Debounce Function ==========
+// ========== UTILITY FUNCTIONS ==========
+
+// Debounce function for performance optimization
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -310,57 +306,186 @@ function debounce(func, wait) {
     };
 }
 
-// Apply debounce to scroll events if needed
-window.addEventListener('scroll', debounce(function() {
-    // Any additional scroll-based functionality can be added here
-}, 100));
+// Throttle function for scroll events
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
 
-// ========== WHATSAPP CLICK TRACKING (Optional Analytics) ==========
-const waLinks = document.querySelectorAll('a[href*="wa.me"]');
-waLinks.forEach(link => {
-    link.addEventListener('click', function() {
-        console.log('WhatsApp link clicked:', this.href);
-        // You can integrate Google Analytics or other tracking here
-        // gtag('event', 'whatsapp_click', { 'event_category': 'engagement' });
-    });
-});
+// Show notification (custom toast)
+function showNotification(message) {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: linear-gradient(135deg, #7f1130, #5c0d23);
+        color: white;
+        padding: 1.25rem 2rem;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(127, 17, 48, 0.3);
+        z-index: 10000;
+        font-weight: 600;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        max-width: 400px;
+        animation: slideIn 0.3s ease;
+    `;
+    notification.textContent = message;
+    
+    // Add animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    document.body.appendChild(notification);
+    
+    // Remove after 4 seconds
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+            document.head.removeChild(style);
+        }, 300);
+    }, 4000);
+}
 
-// ========== COPY TO CLIPBOARD FUNCTIONALITY (Future Enhancement) ==========
+// Copy to clipboard utility
 function copyToClipboard(text) {
-    if (navigator.clipboard) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(() => {
-            console.log('Text copied to clipboard');
+            showNotification('✅ Tersalin ke clipboard!');
         }).catch(err => {
-            console.error('Failed to copy text: ', err);
+            console.error('Failed to copy:', err);
         });
     } else {
-        // Fallback for older browsers
+        // Fallback
         const textArea = document.createElement('textarea');
         textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-9999px';
         document.body.appendChild(textArea);
         textArea.select();
         try {
             document.execCommand('copy');
-            console.log('Text copied to clipboard (fallback)');
+            showNotification('✅ Tersalin ke clipboard!');
         } catch (err) {
-            console.error('Failed to copy text: ', err);
+            console.error('Failed to copy:', err);
         }
         document.body.removeChild(textArea);
     }
 }
 
-// ========== SERVICE WORKER REGISTRATION (For PWA - Optional) ==========
-if ('serviceWorker' in navigator) {
-    // Uncomment below if you want to add PWA capability
-    /*
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-            .then(registration => {
-                console.log('Service Worker registered successfully:', registration);
-            })
-            .catch(error => {
-                console.log('Service Worker registration failed:', error);
-            });
+// Lazy load images
+function lazyLoadImages() {
+    const images = document.querySelectorAll('img[data-src]');
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                imageObserver.unobserve(img);
+            }
+        });
     });
-    */
+    
+    images.forEach(img => imageObserver.observe(img));
+}
+
+// Initialize lazy loading if images exist
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', lazyLoadImages);
+} else {
+    lazyLoadImages();
+}
+
+// ========== PERFORMANCE MONITORING ==========
+window.addEventListener('load', function() {
+    // Log page load time
+    const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
+    console.log(`⚡ Page loaded in ${loadTime}ms`);
+});
+
+// ========== FAQ ACCORDION (If exists) ==========
+const faqItems = document.querySelectorAll('.faq-item');
+
+if (faqItems.length > 0) {
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        
+        if (question) {
+            question.addEventListener('click', function() {
+                // Check if this item is already active
+                const isActive = item.classList.contains('active');
+                
+                // Close all FAQ items
+                faqItems.forEach(faqItem => {
+                    faqItem.classList.remove('active');
+                    const answer = faqItem.querySelector('.faq-answer');
+                    if (answer) {
+                        answer.style.maxHeight = null;
+                    }
+                });
+                
+                // If it wasn't active, open it
+                if (!isActive) {
+                    item.classList.add('active');
+                    const answer = item.querySelector('.faq-answer');
+                    if (answer) {
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                    }
+                }
+            });
+        }
+    });
+}
+
+// ========== BACK TO TOP BUTTON (If exists) ==========
+const backToTopBtn = document.getElementById('backToTop');
+
+if (backToTopBtn) {
+    window.addEventListener('scroll', debounce(function() {
+        if (window.pageYOffset > 500) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    }, 100));
+    
+    backToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
 }
